@@ -3,6 +3,7 @@ package com.example.demo;
 import java.io.IOException;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -27,6 +28,9 @@ public class MainController {
 
     @Autowired
     ItemRepository itemRepository;
+
+    @Autowired
+    BringItService bringItService;
 
 
 
@@ -141,6 +145,14 @@ public String addRoom(Model model){
     public String saveRoom(@ModelAttribute("anItem") Item item, Model model){
         itemRepository.save(item);
         model.addAttribute("items", itemRepository.findAll());
+        return "displayitem";
+    }
+    @RequestMapping("/search")
+    public String searchPromises(Model model, HttpServletRequest request)
+    {
+        String searchedFor = request.getParameter("searchfor");
+        model.addAttribute("searchResults",true);
+        bringItService.searchItem(model,searchedFor);
         return "displayitem";
     }
 

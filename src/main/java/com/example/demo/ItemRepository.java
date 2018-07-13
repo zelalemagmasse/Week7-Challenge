@@ -9,4 +9,9 @@ public interface ItemRepository extends CrudRepository<Item,Long> {
   //  List<Item> findFirst10ByNameOfItem();
     //List<Item> findFirst1();
     //List<Item> findTopByNameOfItem();
+
+    Iterable<Item> findAllByNameOfItemContainingIgnoreCase(String s);
+    Iterable<Item> findAllByTagsContainingIgnoreCase(String s);
+
+
 }
