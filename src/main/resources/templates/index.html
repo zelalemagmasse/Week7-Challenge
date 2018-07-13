@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.tymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.tymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Friends Site</title>
+    <title>Selling Item Site</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
 </head>
@@ -25,7 +25,7 @@
 
         </div>
 
-        <div sec:hasAuthority="ADMIN">
+        <div sec:authorize="hasAuthority('ADMIN')">
 
             <li class="nav-item" >
                 <a class="nav-link" th:href="@{/displayusers}">See All User</a>

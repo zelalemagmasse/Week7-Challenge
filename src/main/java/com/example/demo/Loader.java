@@ -37,13 +37,7 @@ public class Loader  implements CommandLineRunner {
         u.setEmail("zee@gmail.com");
         u.addRole(r);
         userRepository.save(u);
-//        return "User{" +
-//                "id=" + id +
-//                ", email='" + email + '\'' +
-//                ", password='" + password + '\'' +
-//                ", userName='" + userName + '\'' +
-//                ", roleOfUsers=" + roleOfUsers +
-//
+
 
         Item i= new Item();
         i.setNameOfItem("Television");
