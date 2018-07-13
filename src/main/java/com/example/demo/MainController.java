@@ -11,11 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -132,6 +128,14 @@ public String addRoom(Model model){
     model.addAttribute("anItem", new Item());
     return "additem";
 }
+    @RequestMapping("/updateliste/{id}")
+    public String updateRoom(@PathVariable("id") long id, Model model){
+        Item anItem = itemRepository.findById(id).get();
+        anItem.setSoldout(true);
+        itemRepository.save(anItem);
+        model.addAttribute("items", itemRepository.findAll());
+        return "displayitem";
+    }
 
     @RequestMapping("/saveitem")
     public String saveRoom(@ModelAttribute("anItem") Item item, Model model){

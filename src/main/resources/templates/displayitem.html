@@ -16,8 +16,8 @@
         <th scope="col">Item tag</th>
         <th scope="col">Price</th>
         <th scope="col">Available</th>
-        <th scope="col">Show Details</th>
-        <th scope="col">Update Room</th>
+        <th scope="col">Buy</th>
+
     </tr>
     </thead>
     <tbody>
@@ -27,9 +27,8 @@
         <td th:text="${itemslist.description}"></td>
         <td  th:text="${itemslist.tags}"></td>
         <td  th:text="${itemslist.price}"></td>
-        <td  th:text="${itemslist.Soldout ? 'Yes' : 'No'}"></td>
-        <td > <a th:href="@{/details/{id}(id=${itemslist.id})}" target="_blank">Look at details of this Item</a></td>
-        <td ><a th:href="@{/updateliste/{id}(id=${itemslist.id})}">Update Item</a></td>
+        <td  th:text="${itemslist.Soldout ? 'SOLD OUT' : 'AVAILABLE'}"></td>
+        <td ><a th:href="@{/updateliste/{id}(id=${itemslist.id})}">Buy item</a></td>
     </tr>
     </tbody>
 </table>
