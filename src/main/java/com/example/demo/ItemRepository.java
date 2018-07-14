@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface ItemRepository extends CrudRepository<Item,Long> {
    List<Item> findAllByNameOfItemContainingIgnoreCase(String s);
    List<Item> findAllByTagsContainingIgnoreCase(String s);
-    @Query(value = "select top 2 * from Item", nativeQuery = true)
+    @Query(value = "select top 10 * from Item", nativeQuery = true)
 	Iterable<Item> getTop10();
 
 
