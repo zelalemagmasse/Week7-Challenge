@@ -27,8 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private   SSUDS userDetailService;
+
     @Bean
     public PasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
@@ -47,14 +46,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/index").permitAll()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/login").hasAnyAuthority("USER","ADMIN")
-                .antMatchers("/displayusers}").hasAnyAuthority("ADMIN")
+                .antMatchers("/displayusers/**", "/suspend/**", "/unsuspend/**").hasAnyAuthority("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll(true)
+                .and()
+                .exceptionHandling().accessDeniedPage("/403")
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout").permitAll();
 
@@ -78,6 +78,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             public void addViewControllers(ViewControllerRegistry registry) {
                 ViewControllerRegistration r = registry.addViewController("/login");
                 r.setViewName("login");
+                
+                ViewControllerRegistration denied = registry.addViewController("/403");
+                denied .setViewName("403");       
+                
             }
         };
     }

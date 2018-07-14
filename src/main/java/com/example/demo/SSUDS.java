@@ -29,7 +29,7 @@ public class SSUDS implements UserDetailsService {
             {
                 throw new UsernameNotFoundException(username+" not found");
             }
-            return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),getAuthorities(user));
+            return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), !user.getSuspended(), true, true, true, getAuthorities(user));
 
 
         }catch (Exception e)

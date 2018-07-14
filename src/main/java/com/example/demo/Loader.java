@@ -5,7 +5,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 
-
 @Component
 public class Loader  implements CommandLineRunner {
     @Autowired
@@ -21,10 +20,10 @@ public class Loader  implements CommandLineRunner {
     @Override
     public  void run(String ... Strings)throws Exception{
 
+        Role r2 = new Role();
+        r2.setRole("USER");
+        roleRepository.save(r2);
         Role r = new Role();
-        r.setRole("USER");
-        roleRepository.save(r);
-
         r = new Role();
         r.setRole("ADMIN");
         roleRepository.save(r);
@@ -32,12 +31,19 @@ public class Loader  implements CommandLineRunner {
         User u= new User();
         u.addRole(r);
 
-        u.setUserName("yaa");
+        u.setUserName("admin");
         u.setPassword("abc123");
         u.setEmail("zee@gmail.com");
         u.addRole(r);
         userRepository.save(u);
-
+        
+        
+        User u2= new User();
+        u2.setUserName("zee");
+        u2.setPassword("zee");
+        u2.setEmail("zele@gmail.com");
+        u2.addRole(r2);
+        userRepository.save(u2);
 
         Item i= new Item();
         i.setNameOfItem("Television");

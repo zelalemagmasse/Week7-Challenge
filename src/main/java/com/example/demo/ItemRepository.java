@@ -1,17 +1,15 @@
 package com.example.demo;
 
-import org.springframework.data.repository.CrudRepository;
-
 import java.util.List;
 
-public interface ItemRepository extends CrudRepository<Item,Long> {
- // List<Item> findAllTopTenByNameOfItem();
-  //  List<Item> findFirst10ByNameOfItem();
-    //List<Item> findFirst1();
-    //List<Item> findTopByNameOfItem();
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 
-    Iterable<Item> findAllByNameOfItemContainingIgnoreCase(String s);
-    Iterable<Item> findAllByTagsContainingIgnoreCase(String s);
+public interface ItemRepository extends CrudRepository<Item,Long> {
+   List<Item> findAllByNameOfItemContainingIgnoreCase(String s);
+   List<Item> findAllByTagsContainingIgnoreCase(String s);
+    @Query(value = "select top 2 * from Item", nativeQuery = true)
+	Iterable<Item> getTop10();
 
 
 }
